@@ -7,35 +7,28 @@
 #include <mutex>
 #include <condition_variable>
 
-using namespace std;
-
-mutex mtx;
-condition_variable condVar;
+std::mutex mtx;
+std::condition_variable condVar;
 int threadControlInt = 2;
 
 void thread1() {
-    using namespace std::this_thread;
-    const int t1ID = 1;
-    std::unique_lock<std::mutex> lck(mtx);
-    while (threadControlInt!=t1ID) {
-        condVar.wait(lck);
-    }
-    lck.unlock();
-    cout << t1ID;
-    sleep_for(std::chrono::seconds(2)); // introduced delay
-    lck.lock();
-    threadControlInt = 4;
-    lck.unlock();
-    condVar.notify_all();
+  const int thread1ID = 1;
+  std::unique_lock<std::mutex> mutexLock(mtx);
+  while (threadControlInt != thread1ID) {
+      condVar.wait(mutexLock);
+  }
+  mutexLock.unlock();
+  std::cout << thread1ID;
+  std::this_threadsleep_for(std::chrono::seconds(2));
+  mutexLock.lock();
+  threadControlInt = 4;
+  mutexLock.unlock();
+  condVar.notify_all();
 }
 
 
 int main(void) {
-
-    thread t1(thread1); 
-
-    t1.join();
-
-    return 0;
-
+  std::thread t1(thread1); 
+  t1.join();
+  return 0;
 }
