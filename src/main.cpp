@@ -7,19 +7,20 @@
 #include <mutex>
 #include <condition_variable>
 
+const int THREAD_ID = 1;
+
 std::mutex mtx;
 std::condition_variable condVar;
-int threadControlInt = 2;
+int threadControlInt = 1;
 
-void thread1() {
-  const int thread1ID = 1;
+void menu() {
   std::unique_lock<std::mutex> mutexLock(mtx);
-  while (threadControlInt != thread1ID) {
+  while (threadControlInt != THREAD_ID) {
       condVar.wait(mutexLock);
   }
   mutexLock.unlock();
   std::cout << thread1ID;
-  std::this_threadsleep_for(std::chrono::seconds(2));
+  std::this_thread::sleep_for(std::chrono::seconds(2));
   mutexLock.lock();
   threadControlInt = 4;
   mutexLock.unlock();
@@ -28,7 +29,7 @@ void thread1() {
 
 
 int main(void) {
-  std::thread t1(thread1); 
-  t1.join();
+  std::thread menuThread(menu); 
+  menuThread.join();
   return 0;
 }
