@@ -30,35 +30,35 @@ void Rover::forward(unsigned int metres) {
   this->wheelBackRight->revolve(revolutions);
 }
 void Rover::backward(unsigned int metres) {
-  this->wheelFrontLeft
+  /* this->wheelFrontLeft
   this->wheelFrontRight
   this->wheelMiddleLeft
   this->wheelMiddleRight
   this->wheelBackLeft
-  this->wheelBackRight
+  this->wheelBackRight */
 }
 
 void Rover::pivot(signed int degrees) {
-  this->wheelFrontLeft
+/*   this->wheelFrontLeft
   this->wheelFrontRight
   this->wheelMiddleLeft
   this->wheelMiddleRight
   this->wheelBackLeft
-  this->wheelBackRight
+  this->wheelBackRight */
 }
 void Rover::pivotClockWise(unsigned int degrees) {
-  this->wheelFrontLeft
+/*   this->wheelFrontLeft
   this->wheelFrontRight
   this->wheelMiddleLeft
   this->wheelMiddleRight
   this->wheelBackLeft
-  this->wheelBackRight
+  this->wheelBackRight */
 }
 void Rover::privotCounterClockWise(unsigned int degrees) {
-  this->wheelFrontLeft
+/*   this->wheelFrontLeft
   this->wheelFrontRight
   this->wheelMiddleLeft
   this->wheelMiddleRight
   this->wheelBackLeft
-  this->wheelBackRight
+  this->wheelBackRight */
 }

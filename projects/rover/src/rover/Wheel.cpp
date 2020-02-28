@@ -12,5 +12,3 @@ void Wheel::log(std::string message) {
 void Wheel::revolve(const double revolutions) {
 
 }
-
-void Wheel::rotateToAngle()

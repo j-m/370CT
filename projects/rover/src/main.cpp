@@ -1,7 +1,6 @@
 #include "./io/menu.h"
-#include "./rover/Rover.h"
 
-#include <iostream>
+#include <thread>
 
 int main(void) {
   std::thread menuThread(Menu::initialise); 
