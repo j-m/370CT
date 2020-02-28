@@ -6,8 +6,12 @@
 
 class SteerableWheel : public Wheel {
   private:
-    unsigned int angle;
+    double angle;
 
+    void rotateClockWise(const double degrees);
+    void rotateCounterClockWise(const double degrees);
   public: 
     SteerableWheel(std::string wheelID);
+
+    void rotateToAngle(const double angle);
 };

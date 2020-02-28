@@ -8,3 +8,9 @@ Wheel::Wheel(std::string wheelID): id(wheelID) {
 void Wheel::log(std::string message) {
   Log::message(this->id, message);
 }
+
+void Wheel::revolve(const double revolutions) {
+
+}
+
+void Wheel::rotateToAngle()

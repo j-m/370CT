@@ -1,5 +1,9 @@
 #include "./menu.h"
 
+#include <iostream>
+#include <thread>
+#include <chrono>
+
 const int simulationCount = 0;
 
 void threads() {

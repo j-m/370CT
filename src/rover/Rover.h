@@ -20,4 +20,11 @@ class Rover {
   
   public:
     Rover();
+
+    void forward(unsigned int metres);
+    void backward(unsigned int metres);
+
+    void pivot(signed int degrees);
+    void pivotClockWise(unsigned int degrees);
+    void privotCounterClockWise(unsigned int degrees);
 };

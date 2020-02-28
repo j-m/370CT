@@ -11,4 +11,6 @@ class Wheel {
     
   public:
     Wheel(std::string wheelID);
+
+    void revolve(const double revolutions);
 };
