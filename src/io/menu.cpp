@@ -2,9 +2,9 @@
 
 const int simulationCount = 0;
 
-void thread() {
+void threads() {
   std::cout << "Thread menu" << std::endl;
-  if (simulationCount === 0) {
+  if (simulationCount == 0) {
     std::cout << "There are currently no simulations running." << std::endl;
     return;
   }
@@ -66,7 +66,7 @@ void menuIntroduction() {
   std::cout << "  q to quit" << std::endl;
   std::cout << "  s for the scenarios menu" << std::endl;
   std::cout << "  t for the thread menu" << std::endl;
-  std::endl;
+  std::cout << std::endl;
   std::cout << "Menus will pause all simulations" << std::endl;
 }
 
