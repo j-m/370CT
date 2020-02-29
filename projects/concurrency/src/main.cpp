@@ -1,26 +1,30 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <vector>
+#include "./Log.h"
+#include "./read.h"
+#include "./producer.h"
+#include "./consumer.h"
+#include "./threadController.h"
 
-std::vector<std::string> lines;
+#include <thread>
 
-void read() {
-  std::ifstream infile("poem.txt");
-  std::string line;
-  while (std::getline(infile, line)) {
-    lines.push_back(line);
+void quit() {
+  while (!finished) {
+    const char keypress = getchar();
+    if (keypress == 'q') {
+      exit(0);
+    }
   }
-}
-
-void display() {
-  for (unsigned int index = 0; index < lines.size(); index++) {
-    std::cout << lines.at(index) << std::endl;
-  }
-}
+  Log::message("Finished");
+} 
 
 int main() {
-  read();
-  display();
+  std::thread quitThread(quit); 
+  std::thread displayThread(Log::messages, read(), 1); 
+  std::thread producerThread(producer, read()); 
+  std::thread consumerThread(consumer);
+  
+  displayThread.join();
+  producerThread.join();
+  consumerThread.join();
+  quitThread.join();
   return 0;
 }
