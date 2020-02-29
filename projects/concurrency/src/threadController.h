@@ -3,7 +3,7 @@
 #include <mutex>
 #include <condition_variable>
 
-static constexpr int BUFFER_SIZE = 10;
+static constexpr int BUFFER_SIZE = 1;
 enum Thread { CONSUMER, PRODUCER };
 
 extern Thread thread;

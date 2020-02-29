@@ -3,6 +3,9 @@
 
 #include <mutex>
 #include <condition_variable>
+#include <iostream>
+
+std::string poem;
 
 void relinquishConsumerControl() {
   std::unique_lock<std::mutex> mutexLock(producerConsumerMutex);
@@ -12,7 +15,13 @@ void relinquishConsumerControl() {
 }
 
 void consume() {
- 
+  for (unsigned int bufferIndex = 0; bufferIndex < BUFFER_SIZE; bufferIndex++) {
+    const char bufferCharacter = buffer[bufferIndex];
+    std::cout << "Taking " << bufferCharacter << " off the buffer" << std::endl;
+    poem += bufferCharacter;
+    std::cout << "Current poem: " << poem << std::endl;
+    buffer[bufferIndex] = 0;
+  }
 }
 
 void waitForConsumerControl() {
@@ -24,6 +33,7 @@ void waitForConsumerControl() {
 }
 
 void consumer() {
+  poem = "";
   while (!finished) {
     waitForConsumerControl();
     consume();
