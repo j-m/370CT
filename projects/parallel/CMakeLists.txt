@@ -11,3 +11,5 @@ file(GLOB_RECURSE src src/**.cpp)
 add_executable(${PROJECT_NAME} ${src})
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_11)
 target_link_libraries(${PROJECT_NAME} Threads::Threads)
+set_property(TARGET ${PROJECT_NAME} PROPERTY VS_DEBUGGER_WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
+
