@@ -32,7 +32,7 @@ void vectorMove() {
     #pragma omp parallel for schedule (dynamic, 8)
     for (int threadPointIndex = 0; threadPointIndex < points.size(); threadPointIndex++) {
       CartesianXYZ* currentPoint = points[threadPointIndex];
-      unsigned int closestDistanceSquared = UINT_MAX;
+      unsigned int closestDistanceSquared = -1;
       CartesianXYZ* closestPoint;
       for (unsigned int nonThreadPointIndex = 0; nonThreadPointIndex < points.size(); nonThreadPointIndex++) {
         CartesianXYZ* otherPoint = points[nonThreadPointIndex];
