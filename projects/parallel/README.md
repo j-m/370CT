@@ -59,3 +59,5 @@ By "at runtime" do you mean dynamic schedule? Or literally ask the user for a sc
 Once part 4 done does part 3 need to happen?
 Specifically 5 10 then 20, not like every 5?
 Centre recalculated each iteration?
+Once two neighbours have the same position, do they then go towards others? Eventually all reach a common point.
+

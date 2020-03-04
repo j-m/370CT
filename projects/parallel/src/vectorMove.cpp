@@ -5,7 +5,7 @@
 #include "./vectorMove.h"
 #include "CartesianXYZ.h"
 
-const unsigned int ITERATIONS = 40;
+const unsigned int MAX_ITERATIONS = 60;
 
 std::vector<CartesianXYZ*> points = {
   new CartesianXYZ(  5,  14,  10),
@@ -20,30 +20,11 @@ std::vector<CartesianXYZ*> points = {
   new CartesianXYZ(-16,   7,   4)
 };
 
-CartesianXYZ* findClosestPoint(CartesianXYZ* currentPoint) {
-  unsigned int closestDistanceSquared = UINT_MAX;
-  CartesianXYZ* closestPoint;
-    
-  for (unsigned int nonThreadPointIndex = 0; nonThreadPointIndex < points.size(); nonThreadPointIndex++) {
-    CartesianXYZ* otherPoint = points[nonThreadPointIndex];
-    if (otherPoint == currentPoint) {
-      continue;
-    }   
-    unsigned int distanceSquared = currentPoint->distance(otherPoint);
-    if (distanceSquared < closestDistanceSquared) {
-      closestDistanceSquared = distanceSquared;
-      closestPoint = otherPoint;
-    }
-  }
-  
-  return closestPoint;
-}
-
 void movePoints() {
   #pragma omp parallel for schedule (dynamic, 1)
   for (int threadPointIndex = 0; threadPointIndex < points.size(); threadPointIndex++) {
     CartesianXYZ* currentPoint = points[threadPointIndex];
-    currentPoint->moveCloserTo(findClosestPoint(currentPoint));
+    currentPoint->moveCloserTo(currentPoint->findMidpointToClosestNeighbour(points));
   }
 }
 
@@ -55,7 +36,7 @@ void printPoints() {
 }
 
 void vectorMove() {
-  for (unsigned int iteration = 0; iteration < ITERATIONS; iteration++) {
+  for (unsigned int iteration = 0; iteration < MAX_ITERATIONS; iteration++) {
     movePoints();
     if (iteration % 10 == 0) {
       printPoints();
