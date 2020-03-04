@@ -1,30 +1,54 @@
+#include "./read.h"
+
+#include <fstream>
 #include <stdio.h>
 #include <mpi.h>
 
+int processRank, sizeOfCluster;
+
+void master() {
+
+
+}
+
+void slave() {
+
+}
+
 int main(int argc, char** argv) {
-  int process_Rank, size_Of_Cluster, message_Item;
-
   MPI_Init(&argc, &argv);
-  MPI_Comm_size(MPI_COMM_WORLD, &size_Of_Cluster);
-  MPI_Comm_rank(MPI_COMM_WORLD, &process_Rank);
-
-  for(int i = 0; i < size_Of_Cluster; i++){
-    if(i == process_Rank){
-      printf("Hello World from process %d of %d\n", process_Rank, size_Of_Cluster);
+  MPI_Comm_size(MPI_COMM_WORLD, &sizeOfCluster);
+  MPI_Comm_rank(MPI_COMM_WORLD, &processRank);
+  printf("Test\n");
+  
+  
+  std::ofstream outputFile("out.txt");
+  outputFile << "test \n ";
+  
+  const std::vector<std::string> lines = read();
+  unsigned int lineIndex = 0;
+  while (lineIndex < lines.size()) {
+    if(processRank == 0){
+      for(int cluster = 1; cluster < sizeOfCluster; cluster++){
+        const std::string line = lines.at(lineIndex++);
+        const char* message = line.c_str();
+        const size_t messageLength = strlen(message);
+        MPI_Send(&messageLength, 1, MPI_INT, cluster, 0, MPI_COMM_WORLD);
+        MPI_Send(message, (int)messageLength, MPI_CHAR, cluster, 0, MPI_COMM_WORLD);
+        outputFile << "Sending " << message << "\n";
+        printf("Message sent: %s\n", message);
+      }
+    } else {
+      int messageLength;
+      MPI_Recv(&messageLength, 1, MPI_INT, 0, processRank, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+      char* message = (char*)malloc(messageLength + 1);
+      MPI_Recv(&message, messageLength, MPI_CHAR, 0, processRank, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+      printf("Message received: %s\n", message);
+      outputFile << "Receiving " << message << "\n";
     }
-    MPI_Barrier(MPI_COMM_WORLD);
   }
-
-  if(process_Rank == 0){
-    message_Item = 42;
-    MPI_Send(&message_Item, 1, MPI_INT, 1, 1, MPI_COMM_WORLD);
-    printf("Message Sent: %d\n", message_Item);
-  }
-  else if(process_Rank == 1){
-    MPI_Recv(&message_Item, 1, MPI_INT, 0, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-    printf("Message Received: %d\n", message_Item);
-  }
-
+  
+  MPI_Barrier(MPI_COMM_WORLD);
   MPI_Finalize();
   return 0;
 }

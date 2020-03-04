@@ -13,3 +13,8 @@ set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "${MPI_LINK_FLAGS}")
 target_link_libraries(${PROJECT_NAME} PUBLIC MPI::MPI_C)
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_11)
+add_custom_command(
+  TARGET ${PROJECT_NAME} POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E copy_directory
+  ${PROJECT_SOURCE_DIR}/resources/ $<TARGET_FILE_DIR:${PROJECT_NAME}>
+)
