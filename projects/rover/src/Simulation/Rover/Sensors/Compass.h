@@ -1,0 +1,4 @@
+class Compass {
+  public:
+    Compass();
+}

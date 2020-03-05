@@ -1,9 +1,7 @@
 #pragma once
 
-#include "./Wheel.h"
-#include "./SteerableWheel.h"
-
-#include <string>
+#include "./Movement/Wheel.h"
+#include "./Movement/SteerableWheel.h"
 
 class Rover {
   private:
@@ -13,9 +11,17 @@ class Rover {
     Wheel wheelMiddleRight; 
     SteerableWheel wheelBackLeft; 
     SteerableWheel wheelBackRight; 
+    
+    void movementControl();
+    void navigationControl();
+    void sensor();
+    void groundControl();
+    void arbiter() ;
+    void control();
+    
   public:
     Rover();
-
+  
     void forward();
     void backward();
 

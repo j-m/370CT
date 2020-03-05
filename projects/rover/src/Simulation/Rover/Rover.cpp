@@ -1,9 +1,5 @@
 #include "./Rover.h"
-#include "./SteerableWheel.h"
-#include "../io/Log.h"
-
-unsigned int roverID = 0;
-const float METRES_PER_WHEEL_REVOLUTION = 0.8;
+#include "./Movement/SteerableWheel.h"
 
 Rover::Rover() { }
 
@@ -19,13 +15,13 @@ void Rover::navigationControl() {
   }
 }
 
-void Rover::obstacleControl() {
+void Rover::sensor() {
   while (true) {
     
   }
 }
 
-void Rover::sensor() {
+void Rover::groundControl() {
   while (true) {
     
   }
@@ -33,15 +29,18 @@ void Rover::sensor() {
 
 void Rover::arbiter() {
   while (true) {
-    
+    groundControl();
+    sensor();
+    navigationControl();
+    movementControl();
   }
 }
 
 void Rover::control() {
   std::thread movementControlThread(&Rover::MovementControl, this); 
   std::thread navigationControlThread(&Rover::NavigationControl, this); 
-  std::thread obstacleControlThread(&Rover::ObstacleControl, this); 
   std::thread sensorThread(&Rover::sensor, this); 
+  std::thread groundControlThread(&Rover::GroundControl, this); 
   std::thread arbiterThread(&Rover::arbiter, this); 
   movementControlThread.join();
   navigationControlThread.join();

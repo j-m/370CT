@@ -1,19 +1,21 @@
 #include "./menu.h"
+#include "../Simulation/Simulation.h"
 
 #include <iostream>
 #include <thread>
 #include <chrono>
+#include <vector>
 
-const int simulationCount = 0;
+std::vector<Simulation*> simulations;
 
 void threads() {
   std::cout << "Thread menu" << std::endl;
-  if (simulationCount == 0) {
+  if (simulations.size() == 0) {
     std::cout << "There are currently no simulations running." << std::endl;
     return;
   }
-  std::cout << "There are currently " << simulationCount << " simulations running." << std::endl;
-  std::cout << "Enter a number 1-" << simulationCount << " to isolate output from that simulation."<< std::endl;
+  std::cout << "There are currently " << simulations.size() << " simulations running." << std::endl;
+  std::cout << "Enter a number 1-" << simulations.size() << " to isolate output from that simulation."<< std::endl;
 }
 
 void scenarios() {
@@ -50,7 +52,10 @@ void handleKey(const char key) {
       //scenarios();
       break;
     case 't':
-      //threads();
+      threads();
+      break;
+    case 'n':
+      simulations.push_back(new Simulation());
       break;
     default:
       break;
@@ -67,9 +72,10 @@ void listenToKeyPress() {
 void menuIntroduction() {
   std::cout << "At any time, press" << std::endl;
   //std::cout << "  m for the mode menu" << std::endl;
+  std::cout << "  n for a new simulation" << std::endl;
   std::cout << "  q to quit" << std::endl;
   //std::cout << "  s for the scenarios menu" << std::endl;
-  //std::cout << "  t for the thread menu" << std::endl;
+  std::cout << "  t for the thread menu" << std::endl;
   std::cout << std::endl;
   //std::cout << "Menus will pause all simulations" << std::endl;
 }

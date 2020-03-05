@@ -2,16 +2,20 @@
 
 #include "./Wheel.h"
 
-#include <string>
+enum class WheelRotation : int { 
+  NONE = 0,
+  CLOCKWISE = 1,
+  COUNTER_CLOCKWISE = -1
+};
 
 class SteerableWheel : public Wheel {
   private:
-    double angle;
-
-    void rotateClockWise(const double degrees);
-    void rotateCounterClockWise(const double degrees);
+    WheelRotation rotation;
+    
   public: 
-    SteerableWheel(std::string wheelID);
+    SteerableWheel();
 
-    void rotateToAngle(const double angle);
+    void rotateClockWise();
+    void rotateCounterClockWise();
+    void rotateStop();
 };
