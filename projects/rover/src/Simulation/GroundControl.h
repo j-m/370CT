@@ -1,0 +1,4 @@
+class GroundControl {
+  public:
+    GroundControl();
+}

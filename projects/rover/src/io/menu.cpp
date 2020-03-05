@@ -41,16 +41,16 @@ void modes() {
 void handleKey(const char key) {
   switch(key) {
     case 'm':
-      modes();
+      //modes();
       break;
     case 'q':
       quit();
       break;
     case 's':
-      scenarios();
+      //scenarios();
       break;
     case 't':
-      threads();
+      //threads();
       break;
     default:
       break;
@@ -66,12 +66,12 @@ void listenToKeyPress() {
 
 void menuIntroduction() {
   std::cout << "At any time, press" << std::endl;
-  std::cout << "  m for the mode menu" << std::endl;
+  //std::cout << "  m for the mode menu" << std::endl;
   std::cout << "  q to quit" << std::endl;
-  std::cout << "  s for the scenarios menu" << std::endl;
-  std::cout << "  t for the thread menu" << std::endl;
+  //std::cout << "  s for the scenarios menu" << std::endl;
+  //std::cout << "  t for the thread menu" << std::endl;
   std::cout << std::endl;
-  std::cout << "Menus will pause all simulations" << std::endl;
+  //std::cout << "Menus will pause all simulations" << std::endl;
 }
 
 void Menu::initialise() {

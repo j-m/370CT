@@ -1,0 +1,4 @@
+class Odometer {
+  public:
+    Odometer();
+}
