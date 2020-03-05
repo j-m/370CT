@@ -1,4 +1,5 @@
 #include "./definitions.h"
 
-int processRank;
-int sizeOfCluster;
+int PROCESS_RANK;
+int CLUSTER_SIZE;
+int SLAVE_COUNT;

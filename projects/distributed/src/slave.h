@@ -1,1 +1,1 @@
-void slave();
+void slave(int slaveNumber);

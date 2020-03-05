@@ -1,8 +1,13 @@
+#pragma once
 #include <iostream>
+#include <fstream>
 
 template<typename MessageType>
 void myLogDefinitelyNotUsedByOtherThings(MessageType message) {
   std::cout << message;
+  std::ofstream outfile("out.txt");
+  outfile << message;
+  outfile.close();
 }
  
 template<typename MessageType, typename ValueType, typename... ArgumentsType> 

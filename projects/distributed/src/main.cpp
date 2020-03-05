@@ -5,13 +5,13 @@
 
 int main(int argc, char** argv) {
   initialise(argc, argv);
-
-  if (processRank == 0) {
+  if (PROCESS_RANK == MASTER_RANK) {
     master();
   } else {
-    slave();
+    for(int slaveNumber = 1; slaveNumber < CLUSTER_SIZE; slaveNumber++) {
+      slave(slaveNumber);
+    }
   }
-  
   finalize();
   return 0;
 }
