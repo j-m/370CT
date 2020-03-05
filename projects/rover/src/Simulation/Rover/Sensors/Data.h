@@ -1,8 +1,8 @@
-#include "./Sensors/BatteryChargeLevelIndicator.h"
-#include "./Sensors/Compass.h"
-#include "./Sensors/Geolocator.h"
-#include "./Sensors/Odometer.h"
-#include "./Sensors/SteeringAngleSensor.h"
+#include "./BatteryChargeLevelIndicator.h"
+#include "./Compass.h"
+#include "./Geolocator.h"
+#include "./Odometer.h"
+#include "./SteeringAngleSensor.h"
 
 class Data {
   private:
@@ -24,4 +24,4 @@ class Data {
     
   public:
     Data();
-}
+};

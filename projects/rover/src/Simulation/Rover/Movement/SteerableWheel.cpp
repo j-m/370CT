@@ -3,13 +3,13 @@
 SteerableWheel::SteerableWheel(): Wheel() { }
 
 void SteerableWheel::rotateClockWise() {
-  this->rotation = WheelRotation::POSITIVE;
+  this->rotation = WheelRotation::CLOCKWISE;
 }
 
 void SteerableWheel::rotateCounterClockWise() {
-  this->rotation = WheelRotation::NEGATIVE;
+  this->rotation = WheelRotation::COUNTER_CLOCKWISE;
 }
 
-void SteerableWheel::rotateCounterClockWise() {
+void SteerableWheel::stopRotating() {
   this->rotation = WheelRotation::NONE;
 }

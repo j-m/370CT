@@ -8,4 +8,4 @@ class Simulation {
     
   public:
     Simulation();
-}
+};

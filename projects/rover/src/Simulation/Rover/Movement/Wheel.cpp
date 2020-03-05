@@ -4,14 +4,14 @@ Wheel::Wheel() {
   this->power = WheelPower::NONE;
 }
 
-void Wheel::moveForwards() {
+void Wheel::forwards() {
   this->power = WheelPower::POSITIVE;
 }
 
-void Wheel::moveBackwards() {
+void Wheel::backwards() {
   this->power = WheelPower::NEGATIVE;
 }
 
-void Wheel::moveStop() {
+void Wheel::stopMoving() {
   this->power = WheelPower::NONE;
 }

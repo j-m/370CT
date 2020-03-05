@@ -2,6 +2,7 @@
 
 #include "./Movement/Wheel.h"
 #include "./Movement/SteerableWheel.h"
+#include "./Sensors/Data.h"
 
 class Rover {
   private:
@@ -11,6 +12,8 @@ class Rover {
     Wheel wheelMiddleRight; 
     SteerableWheel wheelBackLeft; 
     SteerableWheel wheelBackRight; 
+    
+    Data data;
     
     void movementControl();
     void navigationControl();
@@ -22,10 +25,9 @@ class Rover {
   public:
     Rover();
   
-    void forward();
-    void backward();
+    void forwards();
+    void backwards();
 
-    void resetSteerableWheels();
-    void setSteerableWheelsToPivotClockWise();
-    void setSteerableWheelsToPivotCounterClockWise();
+    void prepareToPivotClockWise();
+    void prepareToPivotCounterClockWise();
 };

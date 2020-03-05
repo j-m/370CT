@@ -1,4 +1,4 @@
 class GroundControl {
   public:
     GroundControl();
-}
+};

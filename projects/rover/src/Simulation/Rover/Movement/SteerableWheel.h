@@ -17,5 +17,5 @@ class SteerableWheel : public Wheel {
 
     void rotateClockWise();
     void rotateCounterClockWise();
-    void rotateStop();
+    void stopRotating();
 };

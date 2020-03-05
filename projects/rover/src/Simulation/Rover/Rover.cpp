@@ -1,6 +1,8 @@
 #include "./Rover.h"
 #include "./Movement/SteerableWheel.h"
 
+#include <thread>
+
 Rover::Rover() { }
 
 void Rover::movementControl() {
@@ -37,13 +39,13 @@ void Rover::arbiter() {
 }
 
 void Rover::control() {
-  std::thread movementControlThread(&Rover::MovementControl, this); 
-  std::thread navigationControlThread(&Rover::NavigationControl, this); 
+  std::thread movementControlThread(&Rover::movementControl, this); 
+  std::thread navigationControlThread(&Rover::navigationControl, this); 
   std::thread sensorThread(&Rover::sensor, this); 
-  std::thread groundControlThread(&Rover::GroundControl, this); 
+  std::thread groundControlThread(&Rover::groundControl, this); 
   std::thread arbiterThread(&Rover::arbiter, this); 
   movementControlThread.join();
   navigationControlThread.join();
-  obstacleControlThread.join();
+  groundControlThread.join();
   arbiterThread.join();
 }

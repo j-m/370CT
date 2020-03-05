@@ -13,7 +13,7 @@ class Wheel {
   public:
     Wheel();
 
-    void moveForwards();
-    void moveBackwards();
-    void moveStop();
+    void forwards();
+    void backwards();
+    void stopMoving();
 };

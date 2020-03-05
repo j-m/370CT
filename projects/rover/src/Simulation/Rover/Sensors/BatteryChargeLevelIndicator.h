@@ -1,4 +1,4 @@
 class BatteryChargeLevelIndicator {
   public:
     BatteryChargeLevelIndicator();
-}
+};

@@ -1,4 +1,4 @@
 class Geolocator {
   public:
     Geolocator();
-}
+};
