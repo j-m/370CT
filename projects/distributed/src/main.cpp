@@ -1,51 +1,40 @@
 #include "./read.h"
 
-#include <fstream>
 #include <stdio.h>
 #include <mpi.h>
 
-int processRank, sizeOfCluster;
+int processRank;
+int sizeOfCluster;
+std::vector<std::string> lines = read();
 
 void master() {
-
-
+  size_t lineIndex = 0;
+  while (lineIndex < lines.size()) {
+    for(int slave = 1; slave < sizeOfCluster; slave++){
+      const std::string line = lines.at(lineIndex++);
+      MPI_Send(&lineIndex, 1, MPI_INT, slave, 0, MPI_COMM_WORLD);
+      printf("Telling slave %d to read line %d\n", slave, (int)lineIndex);
+    }
+  }
 }
 
 void slave() {
-
+  int lineIndex;
+  while (lineIndex < lines.size()) {
+    MPI_Recv(&lineIndex, 1, MPI_INT, 0, processRank, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+    printf("Slave %d reading line %d\n", processRank, lineIndex);
+  }
 }
 
 int main(int argc, char** argv) {
   MPI_Init(&argc, &argv);
   MPI_Comm_size(MPI_COMM_WORLD, &sizeOfCluster);
   MPI_Comm_rank(MPI_COMM_WORLD, &processRank);
-  printf("Test\n");
-  
-  
-  std::ofstream outputFile("out.txt");
-  outputFile << "test \n ";
-  
-  const std::vector<std::string> lines = read();
-  unsigned int lineIndex = 0;
-  while (lineIndex < lines.size()) {
-    if(processRank == 0){
-      for(int cluster = 1; cluster < sizeOfCluster; cluster++){
-        const std::string line = lines.at(lineIndex++);
-        const char* message = line.c_str();
-        const size_t messageLength = strlen(message);
-        MPI_Send(&messageLength, 1, MPI_INT, cluster, 0, MPI_COMM_WORLD);
-        MPI_Send(message, (int)messageLength, MPI_CHAR, cluster, 0, MPI_COMM_WORLD);
-        outputFile << "Sending " << message << "\n";
-        printf("Message sent: %s\n", message);
-      }
-    } else {
-      int messageLength;
-      MPI_Recv(&messageLength, 1, MPI_INT, 0, processRank, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-      char* message = (char*)malloc(messageLength + 1);
-      MPI_Recv(&message, messageLength, MPI_CHAR, 0, processRank, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-      printf("Message received: %s\n", message);
-      outputFile << "Receiving " << message << "\n";
-    }
+
+  if (processRank == 0) {
+    master();
+  } else {
+    slave();
   }
   
   MPI_Barrier(MPI_COMM_WORLD);
