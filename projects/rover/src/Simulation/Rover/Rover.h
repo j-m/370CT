@@ -4,6 +4,16 @@
 #include "./Movement/SteerableWheel.h"
 #include "./Sensors/Data.h"
 
+enum class RoverMovement : int { 
+  NONE,
+  FORWARDS,
+  BACKWARDS,
+  STOP_MOVE,
+  PREPARE_CW,
+  PREPARE_CCW,
+  RESET_ROTATION
+};
+
 class Rover {
   private:
     SteerableWheel wheelFrontLeft; 
@@ -13,6 +23,9 @@ class Rover {
     SteerableWheel wheelBackLeft; 
     SteerableWheel wheelBackRight; 
     
+    RoverMovement movement;
+    
+    Data previousData;
     Data data;
     
     void movementControl();
@@ -22,12 +35,12 @@ class Rover {
     void arbiter() ;
     void control();
     
-  public:
-    Rover();
-  
     void forwards();
     void backwards();
 
     void prepareToPivotClockWise();
     void prepareToPivotCounterClockWise();
+    
+  public:
+    Rover();
 };
