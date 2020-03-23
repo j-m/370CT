@@ -10,10 +10,6 @@
 - [ ] Create a thread to display these lines to screen. Each line should be displayed when a short (programmed) delay has transpired. I recommend one second, but this is not a requirement.
 - [ ] Each line of the poem must only be displayed once. Failure to adhere to this requirement will reduce your grade.
 
-### Part Two - Questions
-
-Am I supposed you use a thread for each line read?
-
 ## Part Three
 
 - [ ] Using Condition Variables, create a producer consumer program that transfers your poem one character at a time to the consumer.
@@ -21,7 +17,13 @@ Am I supposed you use a thread for each line read?
 - [ ] Add each completed line to the poem, and display the poem that you've collected so far.
 - [ ] Once the entire poem has been transferred, state this and display the completed poem.
 
-### Part Three - Questions
+## Questions
 
-- Does character by character mean 1 buffer sized one, then?
-- What output do you actually want displayed?
+- Am I supposed you use a thread for each line read?  
+  Doesn't matter.
+  
+- Does "character by character" mean a buffer of size one?  
+  Yes.
+  
+- What output do you actually want displayed?  
+  Character on buffer, character off buffer. Output so far. Delay each print.
