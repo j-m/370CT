@@ -2,7 +2,6 @@ enum class MovementCommand : int {
   NONE,
   FORWARDS,
   BACKWARDS,
-  STOP_MOVE,
   PREPARE_CLOCK_WISE,
   PREPARE_COUNTER_CLOCK_WISE,
   PIVOT_CLOCK_WISE,

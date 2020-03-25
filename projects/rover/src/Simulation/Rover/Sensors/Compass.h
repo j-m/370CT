@@ -1,4 +1,0 @@
-class Compass {
-  public:
-    Compass();
-};

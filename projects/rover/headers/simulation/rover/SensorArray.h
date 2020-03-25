@@ -1,15 +1,13 @@
-#include "./BatteryChargeLevelIndicator.h"
-#include "./Compass.h"
-#include "./Geolocator.h"
+#include "./Camera.h"
 #include "./Odometer.h"
 #include "./SteeringAngleSensor.h"
 
-class Data {
-  private:
-    BatteryChargeLevelIndicator batteryChargeLevelIndicator;
-    Compass compass;
-    Geolocator geolocator;
+class SensoryArray {
+  public:
+    SensoryArray();
     
+    Camera camera;
+
     Odometer frontLeftOdometer;
     Odometer frontRightOdometer;
     Odometer middleLeftOdometer;
@@ -21,7 +19,4 @@ class Data {
     SteeringAngleSensor frontRightAngleSensor;
     SteeringAngleSensor backLeftAngleSensor;
     SteeringAngleSensor backRightAngleSensor;
-    
-  public:
-    Data();
 };

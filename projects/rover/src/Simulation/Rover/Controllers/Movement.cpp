@@ -62,14 +62,13 @@ void Rover::movementControl() {
   while (true) {
     switch (this->movement) { 
       case MovementCommand::NONE:
+        this->stop();
         break;
       case MovementCommand::FORWARDS:
         this->forwards();
         break;
       case MovementCommand::BACKWARDS:
         this->backwards();
-        break;
-      case MovementCommand::STOP_MOVE:
         break;
       case MovementCommand::PREPARE_CLOCK_WISE:
         this->prepareToPivotClockWise();

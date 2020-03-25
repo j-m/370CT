@@ -2,7 +2,8 @@
 
 #include "./Movement/Wheel.h"
 #include "./Movement/SteerableWheel.h"
-#include "./Sensors/Data.h"
+#include "./Control/MovementCommand.h"
+#include "./Control/WheelCommandSet.h"
 
 class Rover {
   private:
@@ -12,16 +13,13 @@ class Rover {
     Wheel wheelMiddleRight; 
     SteerableWheel wheelBackLeft; 
     SteerableWheel wheelBackRight; 
-
-    Data data;
     
+    WheelCommandSet wheelCommandSet;
+    MovementCommand movementCommand;
     void wheelControl();
     void movementControl();
-    void navigationControl();
-    void sensorControl();
-    void groundControl();
-    void arbiter();
     
+    void stop();
     void forwards();
     void backwards();
     void prepareToPivotClockWise();

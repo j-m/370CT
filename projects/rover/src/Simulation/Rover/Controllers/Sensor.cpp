@@ -2,6 +2,8 @@
 
 
 void Rover::sensorControl() {
+  // Dead reckoning
+  
   // Detect at destination 
   
   // Issues occur when
