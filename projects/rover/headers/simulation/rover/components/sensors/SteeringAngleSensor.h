@@ -1,4 +1,0 @@
-class SteeringAngleSensor {
-  public:
-    SteeringAngleSensor();
-};
