@@ -1,9 +1,8 @@
-#include "./io/menu.h"
-
-#include <thread>
+#include "global.h"
+#include "io/output.h"
 
 int main(void) {
-  std::thread menuThread(Menu::initialise); 
-  menuThread.join();
+  Global::initialise();
+  Output::introduction();
   return 0;
 }
