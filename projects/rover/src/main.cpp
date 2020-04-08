@@ -1,8 +1,8 @@
 #include "global.h"
-#include "io/output.h"
+#include "io.h"
 
 int main(void) {
   Global::initialise();
-  Output::introduction();
+  IO::Output::Menu::introduction();
   return 0;
 }

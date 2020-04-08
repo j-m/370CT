@@ -1,3 +1,4 @@
+#pragma once
 enum Problems {
   FIRST_ATTEMPT_FAILED,
   MULTIPLE_ISSUES,

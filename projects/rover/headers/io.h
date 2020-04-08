@@ -1,7 +1,6 @@
 #pragma once
 #include "ProducerConsumer.h"
 
-#include <vector>
 #include <string>
 
 namespace IO {
@@ -9,15 +8,26 @@ namespace IO {
   void terminate();
   
   namespace Output {
+    void initialise();
+    void terminate();
+    
+    void console(std::string message);
+    
     namespace Menu {     
       void introduction();
+      void modes();
+      void scenarios();
+      void threads();
     }
   }
   
   namespace Input {
-    ProducerConsumer<std::vector<std::string>> keyboard;
+    void initialise();
+    void terminate();
     
+    extern ProducerConsumer<char> keyboard;
     void listenToKeyPress();
+    
     namespace Menu {
       void poll();
       void parseKey(char command);

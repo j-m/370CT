@@ -1,10 +1,12 @@
 #include "io.h"
 
-void IO::Input::Menu::introduction() {
+#include <iostream>
+
+void IO::Output::Menu::introduction() {
   /*
   lock mutex
   add to display queue
-  
+  */
   
   std::cout << "At any time, press" << std::endl;
   //std::cout << "  m for the mode menu" << std::endl;
@@ -15,6 +17,7 @@ void IO::Input::Menu::introduction() {
   std::cout << std::endl;
   //std::cout << "Menus will pause all simulations" << std::endl;
   
+  /*
   unlock mutext
   */
 }

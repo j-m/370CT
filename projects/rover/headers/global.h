@@ -1,5 +1,6 @@
+#pragma once
 namespace Global {
-  bool running = false;
+  extern bool running;
   void terminate();
   void initialise();
 }

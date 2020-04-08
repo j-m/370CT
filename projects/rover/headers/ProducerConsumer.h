@@ -16,8 +16,8 @@ public:
   BufferType buffer;
   
   void initialise(std::function<void()> producer, std::function<void()> consumer) {
-    this->producer = std::thread(producer());
-    this->consumer = std::thread(consumer());
+    this->producer = std::thread(producer);
+    this->consumer = std::thread(consumer);
   };
   void terminate(){
     this->producer.join();
@@ -47,4 +47,4 @@ private:
       
   std::thread producer;
   std::thread consumer;
-}
+};

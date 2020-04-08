@@ -3,8 +3,8 @@
 
 void IO::Input::listenToKeyPress() {
   while (Global::running) {
-    IO::Menu.waitForControl(Control::PRODUCER);
-    IO::Menu.buffer = getchar();
-    IO::Menu.giveControlTo(Control::CONSUMER);
+    IO::Input::keyboard.waitForControl(Control::PRODUCER);
+    IO::Input::keyboard.buffer = getchar();
+    IO::Input::keyboard.giveControlTo(Control::CONSUMER);
   }
 }

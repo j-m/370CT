@@ -1,6 +1,8 @@
 #include "global.h"
 #include "io.h"
-#include "simulations.h"
+//#include "simulations.h" //TODO
+
+bool Global::running = false;
 
 void Global::initialise() {
   if (Global::running == true) {
@@ -8,11 +10,11 @@ void Global::initialise() {
   }
   Global::running = true;
   IO::initialise();
-  Simulations::initialise();  
+  //Simulations::initialise(); //TODO
 }
 
 void Global::terminate() {
   Global::running = false;
   IO::terminate();
-  Simulations::terminate();  
+  //Simulations::terminate(); //TODO
 }

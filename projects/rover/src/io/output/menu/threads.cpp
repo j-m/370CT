@@ -1,11 +1,12 @@
 #include "io.h"
 
-void IO::Input::Menu::threads() {
-  std::cout << "Thread menu" << std::endl;
-  if (simulations.size() == 0) { 
-    std::cout << "There are currently no simulations running." << std::endl;
+void IO::Output::Menu::threads() {
+  IO::Output::console("Thread menu");
+  //if (simulations.size() == 0) {  // TODO
+    IO::Output::console("There are currently no simulations running.");
     return; 
-  }
-  std::cout << "There are currently " << simulations.size() << " simulations running." << std::endl;
-  std::cout << "Enter a number 1-" << simulations.size() << " to isolate output from that simulation."<< std::endl;
+  //}
+  IO::Output::console("There are currently 0 simulations running.");  // TODO
+  IO::Output::console("Enter a number 1-1 to isolate output from that simulation.");
 }
+   
