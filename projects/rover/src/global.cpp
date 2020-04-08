@@ -1,25 +1,18 @@
+#include "global.h"
 #include "io.h"
+#include "simulations.h"
 
-IO::initialise() {
-  Input::initialise();
-  Output::initialise();
-}
- 
-IO::terminate() {
-  Input::terminate();
-  Output::terminate();
-}
-
-
-void initialise() {
-  input.initialise();
-  display.initialise();
-  simulations.initialise();  
+void Global::initialise() {
+  if (Global::running == true) {
+    return;
+  }
+  Global::running = true;
+  IO::initialise();
+  Simulations::initialise();  
 }
 
-void terminate() {
-  quit = true;
-  input.terminate();
-  display.terminate();
-  simulations.terminate();  
+void Global::terminate() {
+  Global::running = false;
+  IO::terminate();
+  Simulations::terminate();  
 }

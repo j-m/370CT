@@ -8,7 +8,7 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
 file(GLOB_RECURSE src src/**.cpp)
-include_directories(${CMAKE_SOURCE_DIR}/headers)
+include_directories(${PROJECT_SOURCE_DIR}/headers)
 add_executable(${PROJECT_NAME} ${src})
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_11)
 target_link_libraries(${PROJECT_NAME} Threads::Threads)

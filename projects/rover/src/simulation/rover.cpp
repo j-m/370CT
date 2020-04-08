@@ -1,4 +1,4 @@
-spawn thread for each wheel
+/*spawn thread for each wheel
 
 problem count < 5
 
@@ -7,3 +7,4 @@ random wheel
 problem = changed wheel state
 
 each solution passes control to next if unresolved
+*/

@@ -1,4 +1,4 @@
-stop change direction
+/*stop change direction
 lift a wheel
 lower a wheel
 
@@ -13,3 +13,4 @@ keep going forwards
 
 log chosen solution
 
+*/

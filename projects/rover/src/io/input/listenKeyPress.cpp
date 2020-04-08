@@ -1,9 +1,10 @@
-#include "io/input.h"
+#include "global.h"
+#include "io.h"
 
-void Input::listenToKeyPress() {
-  while (true) {
-    waitForControl(Input::Control::HANDLER);
-    Input::key = getchar();
-    giveControlTo(Input::Control::LISTENER);
+void IO::Input::listenToKeyPress() {
+  while (Global::running) {
+    IO::Menu.waitForControl(Control::PRODUCER);
+    IO::Menu.buffer = getchar();
+    IO::Menu.giveControlTo(Control::CONSUMER);
   }
 }

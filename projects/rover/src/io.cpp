@@ -1,11 +1,9 @@
 #include "io.h"
 
-IO::initialise() {
-  Input::initialise();
-  Output::initialise();
+void IO::initialise() {
+  IO::Menu.initialise(IO::Input::listenToKeyPress, IO::Output::Menu::poll);
 }
  
-IO::terminate() {
-  Input::terminate();
-  Output::terminate();
+void IO::terminate() {
+  IO::Menu.terminate();
 }

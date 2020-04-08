@@ -1,4 +1,7 @@
-void introduction() {
+#include "io.h"
+
+void IO::Input::Menu::introduction() {
+  /*
   lock mutex
   add to display queue
   
@@ -13,13 +16,5 @@ void introduction() {
   //std::cout << "Menus will pause all simulations" << std::endl;
   
   unlock mutext
-}
-
-
-#include "./Log.h"
-
-#include <iostream>
-
-void Output::display(std::string message) { //console
-  std::cout << message << std::endl;
+  */
 }
