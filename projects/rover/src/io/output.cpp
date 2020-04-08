@@ -3,5 +3,5 @@
 void IO::Output::initialise() {
 }
  
-void IO::Output::terminate() {
+void IO::Output::join() {
 }

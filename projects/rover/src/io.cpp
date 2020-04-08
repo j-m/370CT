@@ -5,7 +5,7 @@ void IO::initialise() {
   IO::Output::initialise();
 }
  
-void IO::terminate() {
-  IO::Input::terminate();
-  IO::Output::terminate();
+void IO::join() {
+  IO::Input::join();
+  IO::Output::join();
 }

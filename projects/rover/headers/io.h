@@ -5,11 +5,11 @@
 
 namespace IO {
   void initialise();
-  void terminate();
+  void join();
   
   namespace Output {
     void initialise();
-    void terminate();
+    void join();
     
     void console(std::string message);
     
@@ -23,7 +23,7 @@ namespace IO {
   
   namespace Input {
     void initialise();
-    void terminate();
+    void join();
     
     extern ProducerConsumer<char> keyboard;
     void listenToKeyPress();

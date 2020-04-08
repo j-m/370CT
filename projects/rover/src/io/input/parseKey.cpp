@@ -7,7 +7,7 @@ void IO::Input::Menu::parseKey(char command) {
       IO::Output::Menu::modes();
       break;
     case 'q':
-      Global::terminate();
+      Global::quit();
       break;
     case 's':
       IO::Output::Menu::scenarios();

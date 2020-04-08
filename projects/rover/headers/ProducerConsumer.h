@@ -19,7 +19,7 @@ public:
     this->producer = std::thread(producer);
     this->consumer = std::thread(consumer);
   };
-  void terminate(){
+  void join(){
     this->producer.join();
     this->consumer.join();
   };
