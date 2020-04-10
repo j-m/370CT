@@ -1,0 +1,11 @@
+#pragma once
+enum WheelState {
+  NO_ISSUES,
+  FIRST_ATTEMPT_FAILED,
+  MULTIPLE_ISSUES,
+  BLOCKED,
+  FAILURE,
+  FREEWHEELING,
+  SINKING,
+  length
+};

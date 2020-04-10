@@ -2,19 +2,19 @@
 #include "io.h"
 #include "simulations.h"
 
-bool Global::running = false;
+InterThreadVariable<bool> Global::running;
 
 void Global::initialise() {
-  if (Global::running == true) {
+  if (Global::running.get()) {
     return;
   }
-  Global::running = true;
+  Global::running.set(true);
   IO::initialise();
   Simulations::initialise();
 }
 
 void Global::quit() {
-  Global::running = false;
+  Global::running.set(false);
 }
 
 void Global::join() {

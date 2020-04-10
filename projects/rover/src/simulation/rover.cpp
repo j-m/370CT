@@ -1,10 +1,36 @@
-/*spawn thread for each wheel
+#include "global.h"
+#include "simulation/Rover.h"
 
-problem count < 5
+Rover::Rover() {
+  this->encountered = 0;
+  this->running.set(true);
+}
 
-random problem
-random wheel
-problem = changed wheel state
+void Rover::initialise() {
+  for(size_t index = 0; index < Global::Constants::ROVER_NUMBER_OF_WHEELS; index++) {
+    this->wheels[index].initialise(&this->running, &this->states[index]);
+  }
+  std::thread(&Rover::arbitrate, this);
+}
 
-each solution passes control to next if unresolved
-*/
+void Rover::join() {
+  for(size_t index = 0; index < Global::Constants::ROVER_NUMBER_OF_WHEELS; index++) {
+    this->wheels[index].join();
+  }
+}
+
+void Rover::arbitrate() {
+  while (Global::running.get() && this->running.get()) {
+    for(size_t index = 0; index < Global::Constants::ROVER_NUMBER_OF_WHEELS; index++) {
+      //this.arbiter(this->wheels[index]->state);    
+    }
+    
+    this->encountered++;
+    //each solution passes control to next if unresolved
+    //log chosen solution
+    
+    if (this->encountered >= Global::Constants::PROBLEMS_PER_SIMULATION) {
+      this->running.set(false);
+    }
+  }
+}
