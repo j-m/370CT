@@ -10,13 +10,14 @@ void Rover::initialise() {
   for(size_t index = 0; index < Global::Constants::ROVER_NUMBER_OF_WHEELS; index++) {
     this->wheels[index].initialise(&this->running, &this->states[index]);
   }
-  std::thread(&Rover::arbitrate, this);
+  this->arbiter = std::thread(&Rover::arbitrate, this);
 }
 
 void Rover::join() {
   for(size_t index = 0; index < Global::Constants::ROVER_NUMBER_OF_WHEELS; index++) {
     this->wheels[index].join();
   }
+  this->arbiter.join();
 }
 
 void Rover::arbitrate() {
