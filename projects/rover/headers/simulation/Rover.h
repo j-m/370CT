@@ -3,8 +3,8 @@
 #include <thread>
 
 #include "global.h"
-#include "InterThreadVariable.h"
-#include "simulation/Wheel.h"
+#include "common/InterThreadVariable.h"
+#include "simulation/WheelState.h"
 
 class Rover {
 public:
@@ -12,13 +12,12 @@ public:
   
   void initialise();
   void join();
+
+  InterThreadVariable<std::array<WheelState, Global::Constants::ROVER_NUMBER_OF_WHEELS>> states;
   
 private:
-  unsigned int encountered;
-  InterThreadVariable<bool> running;
-  std::array<InterThreadVariable<int>,Global::Constants::ROVER_NUMBER_OF_WHEELS> states;
-  std::array<Wheel, Global::Constants::ROVER_NUMBER_OF_WHEELS> wheels;
-  
+  InterThreadVariable<bool>* running;
+
   std::thread arbiter;
   void arbitrate();
   

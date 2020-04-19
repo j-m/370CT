@@ -4,6 +4,8 @@
 #include <thread>
 #include <functional>
 
+#include "common/ThreadWrapper.h"
+
 enum Control {
   PRODUCER,
   CONSUMER
@@ -15,13 +17,13 @@ public:
   ~ProducerConsumer() {};
   BufferType buffer;
   
-  void initialise(std::function<void()> producer, std::function<void()> consumer) {
-    this->producer = std::thread(producer);
-    this->consumer = std::thread(consumer);
+  void initialise(ThreadWrapper* producer, ThreadWrapper* consumer) {
+    this->producer = producer;
+    this->consumer = consumer;
   };
   void join(){
-    this->producer.join();
-    this->consumer.join();
+    this->producer->join();
+    this->consumer->join();
   };
   
   void waitForControl(Control control) {
@@ -45,6 +47,6 @@ private:
   std::mutex mutex;
   std::condition_variable condition;
       
-  std::thread producer;
-  std::thread consumer;
+  ThreadWrapper* producer;
+  ThreadWrapper* consumer;
 };

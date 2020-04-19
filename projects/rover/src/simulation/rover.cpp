@@ -7,23 +7,17 @@ Rover::Rover() {
 }
 
 void Rover::initialise() {
-  for(size_t index = 0; index < Global::Constants::ROVER_NUMBER_OF_WHEELS; index++) {
-    this->wheels[index].initialise(&this->running, &this->states[index]);
-  }
   this->arbiter = std::thread(&Rover::arbitrate, this);
 }
 
 void Rover::join() {
-  for(size_t index = 0; index < Global::Constants::ROVER_NUMBER_OF_WHEELS; index++) {
-    this->wheels[index].join();
-  }
   this->arbiter.join();
 }
 
 void Rover::arbitrate() {
-  while (Global::running.get() && this->running.get()) {
+  while (Global::running.get() && this->running->get()) {
     for(size_t index = 0; index < Global::Constants::ROVER_NUMBER_OF_WHEELS; index++) {
-      //this.arbiter(this->wheels[index]->state);    
+      this->states[index]);    
     }
     
     this->encountered++;
