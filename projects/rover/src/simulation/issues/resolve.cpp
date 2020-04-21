@@ -9,6 +9,7 @@ void Rover::resolve() {
     // log chosen solution
     // ground control 100% success
     // log solution success
+    // encountered++
     this->control.giveControlTo(ControlHierarchy::OVERSEER);
   }
 }

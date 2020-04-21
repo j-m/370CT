@@ -14,7 +14,6 @@ private:
   SimulationFlag flags;
   Rover rover;
   unsigned int encountered;
-  InterThreadVariable<bool> running;
   
   WheelState getRandomWheelState();
   void setWheelStates();

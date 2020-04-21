@@ -16,17 +16,17 @@ WheelState Simulation::getRandomWheelState() {
   return static_cast<WheelState>(problemChoice(generator));
 }
 
-Simulation::setWheelStates() {
+void Simulation::setWheelStates() {
+  std::array<WheelState, Global::Constants::ROVER_NUMBER_OF_WHEELS> newStates;
   for(size_t index = 0; index < Global::Constants::ROVER_NUMBER_OF_WHEELS; index++) {
-    this->rover->states[index].set(this->getRandomWheelState());
+    newStates[index] = this->getRandomWheelState();
   }
+  this->rover.states.set(newStates);
 }
 
-Simulation::Simulation() {
-  this->running.set(true);
+void Simulation::initialise() {
   while (Global::running.get() 
-   && this->running->get()
-   && this->encountered < Global::Constants::PROBLEMS_PER_SIMULATION) {
+   && this->rover.encountered->get() < Global::Constants::PROBLEMS_PER_SIMULATION) {
     this->setWheelStates();
     this->encountered++;
   }  

@@ -1,6 +1,6 @@
 #pragma once
 enum WheelState {
-  OK = 0,
+  OK,
   BLOCKED_SMALL_OBSTACLE,
   BLOCKED_LARGE_OBSTACLE,
   FAILURE,

@@ -25,7 +25,8 @@ private:
   
   std::thread overseer;
   void oversee();
-  RoverCommands resolution;
+  RoverCommands command;
+  void resolve();
   
   std::thread multiple;
   std::thread wheelState;

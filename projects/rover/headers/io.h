@@ -13,7 +13,7 @@ namespace IO {
     void join();
 
     extern ProducerConsumer<std::vector<std::string>> messages;
-    extern ThreadWrapper consoleThread;
+    extern std::thread consoleThread;
     void console();
     
     namespace Menu {     

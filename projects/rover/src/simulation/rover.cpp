@@ -3,6 +3,7 @@
 
 Rover::Rover() {
   this->encountered->set(0);
+  this->command = RoverCommands::NONE;
   this->control.giveControlTo(ControlHierarchy::OVERSEER);
 }
 

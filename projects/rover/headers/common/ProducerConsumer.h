@@ -1,7 +1,6 @@
 #pragma once
 #include <thread>
 
-#include "common/ThreadWrapper.h"
 #include "common/InterThreadControl.h"
 
 enum Control {
@@ -16,7 +15,7 @@ public:
   ~ProducerConsumer() {};
   BufferType buffer;
   
-  void initialise(ThreadWrapper* producer, ThreadWrapper* consumer) {
+  void initialise(std::thread* producer, std::thread* consumer) {
     this->producer = producer;
     this->consumer = consumer;
   };
@@ -26,6 +25,6 @@ public:
   };
   
 private:
-  ThreadWrapper* producer;
-  ThreadWrapper* consumer;
+  std::thread* producer;
+  std::thread* consumer;
 };
