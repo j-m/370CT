@@ -3,21 +3,9 @@
 #include <iostream>
 
 void IO::Output::Menu::introduction() {
-  /*
-  lock mutex
-  add to display queue
-  */
-  
-  std::cout << "At any time, press" << std::endl;
-  //std::cout << "  m for the mode menu" << std::endl;
-  std::cout << "  n for a new simulation" << std::endl;
-  std::cout << "  q to quit" << std::endl;
-  //std::cout << "  s for the scenarios menu" << std::endl;
-  std::cout << "  t for the thread menu" << std::endl;
-  std::cout << std::endl;
-  //std::cout << "Menus will pause all simulations" << std::endl;
-  
-  /*
-  unlock mutext
-  */
+  IO::Output::messages.waitForControl(Control::PRODUCER);
+  IO::Output::messages.buffer.push_back("At any time press");
+  IO::Output::messages.buffer.push_back("  n for a new simulation");
+  IO::Output::messages.buffer.push_back("  q to quit");
+  IO::Output::messages.waitForControl(Control::CONSUMER);
 }

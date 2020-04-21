@@ -1,6 +1,7 @@
 #pragma once
 #include "common/ProducerConsumer.h"
 
+#include <vector>
 #include <string>
 
 namespace IO {
@@ -10,8 +11,10 @@ namespace IO {
   namespace Output {
     void initialise();
     void join();
-    
-    void console(std::string message);
+
+    extern ProducerConsumer<std::vector<std::string>> messages;
+    extern ThreadWrapper consoleThread;
+    void console();
     
     namespace Menu {     
       void introduction();

@@ -11,7 +11,7 @@ void Rover::checkForWheelStateIssues() {
         this->resolution = RoverCommands::CALL_FOR_HELP;
         this->control.giveControlTo(ControlHierarchy::RESOLVE);
       }
-    }    
+    }
     this->control.giveControlTo(ControlHierarchy::WHEEL_STATE + 1);
   }   
 }

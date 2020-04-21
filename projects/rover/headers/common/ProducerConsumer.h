@@ -4,8 +4,13 @@
 #include "common/ThreadWrapper.h"
 #include "common/InterThreadControl.h"
 
+enum Control {
+  PRODUCER,
+  CONSUMER
+};
+
 template <typename BufferType>
-class ProducerConsumer : InterThreadControl {
+class ProducerConsumer : public InterThreadControl {
 public:
   ProducerConsumer(): InterThreadControl() {};
   ~ProducerConsumer() {};

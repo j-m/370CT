@@ -1,7 +1,8 @@
 #pragma once
 #include <mutex>
 
-template <typename VariableType> class InterThreadVariable {
+template <typename VariableType>
+class InterThreadVariable {
 public:
   InterThreadVariable() {};
   ~InterThreadVariable() {};
