@@ -5,14 +5,14 @@
 
 class ThreadWrapper {
 public:
-  ThreadWrapper(std::thread* thread): thread(thread) {
+  ThreadWrapper(std::thread* threadPointer): thread(threadPointer) {
     joined.set(false);
   };
   ~ThreadWrapper() {};
   
   void join() {
     if (joined.get() == false) {
-      this.thread->join();
+      this->thread->join();
       joined.set(true);
     }
   }

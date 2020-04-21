@@ -1,5 +1,5 @@
 #pragma once
-#include "InterThreadVariable.h"
+#include "common/InterThreadVariable.h"
 
 namespace Global {
   enum Constants {

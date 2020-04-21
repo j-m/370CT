@@ -7,4 +7,4 @@ enum ControlHierarchy {
   WHEEL_MOTION,
   NAVIGATION,
   RESOLVE
-}
+};

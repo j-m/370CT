@@ -6,4 +6,3 @@ enum SimulationFlag {
   FREEWHEELING = 8,
   SINKING = 16
 };
-

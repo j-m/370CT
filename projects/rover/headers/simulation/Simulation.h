@@ -1,6 +1,7 @@
 #pragma once
-#include "InterThreadVariable.h"
+#include "common/InterThreadVariable.h"
 #include "simulation/Flag.h"
+#include "simulation/Rover.h"
 
 class Simulation {
 public:

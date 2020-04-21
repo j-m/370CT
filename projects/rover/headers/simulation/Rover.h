@@ -11,9 +11,9 @@
 
 class Rover {
 public:
-  Rover(InterThreadVariable<bool>* simulationRunning): running(simulationRunning){};
+  Rover();
   
-  void initialise();
+  void initialise(InterThreadVariable<bool>* simulationRunning);
   void join();
 
   InterThreadVariable<std::array<WheelState, Global::Constants::ROVER_NUMBER_OF_WHEELS>> states;
@@ -25,7 +25,7 @@ private:
   
   std::thread overseer;
   void oversee();
-  RoverCommands resolution
+  RoverCommands resolution;
   
   std::thread multiple;
   std::thread wheelState;

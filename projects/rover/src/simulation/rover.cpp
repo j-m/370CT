@@ -1,12 +1,13 @@
 #include "global.h"
 #include "simulation/Rover.h"
 
-Rover::Rover(InterThreadVariable<bool>* simulationRunning): running(simulationRunning){
-    this->encountered->set(0);
-    this->control.giveControlTo(ControlHierarchy::OVERSEER);
-  };
+Rover::Rover() {
+  this->encountered->set(0);
+  this->control.giveControlTo(ControlHierarchy::OVERSEER);
+}
 
-void Rover::initialise() {
+void Rover::initialise(InterThreadVariable<bool>* simulationRunning) {
+  this->running = simulationRunning;
   this->overseer = std::thread(&Rover::oversee, this);
   this->multiple = std::thread(&Rover::checkForMultipleIssues, this);
   this->navigation = std::thread(&Rover::checkForNavigationIssues, this);
@@ -17,7 +18,7 @@ void Rover::initialise() {
 
 void Rover::join() {
   this->overseer.join();
-  this->groundControl.join();
+  this->multiple.join();
   this->navigation.join();
   this->wheelHeight.join();
   this->wheelState.join();
