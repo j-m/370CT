@@ -23,7 +23,6 @@ Simulation::setWheelStates() {
 }
 
 Simulation::Simulation() {
-  this->encountered = 0;
   this->running.set(true);
   while (Global::running.get() 
    && this->running->get()

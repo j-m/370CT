@@ -1,31 +1,25 @@
 #include "global.h"
 #include "simulation/Rover.h"
 
-Rover::Rover() {
-  this->encountered = 0;
-  this->running.set(true);
-}
+Rover::Rover(InterThreadVariable<bool>* simulationRunning): running(simulationRunning){
+    this->encountered->set(0);
+    this->control.giveControlTo(ControlHierarchy::OVERSEER);
+  };
 
 void Rover::initialise() {
-  this->arbiter = std::thread(&Rover::arbitrate, this);
+  this->overseer = std::thread(&Rover::oversee, this);
+  this->multiple = std::thread(&Rover::checkForMultipleIssues, this);
+  this->navigation = std::thread(&Rover::checkForNavigationIssues, this);
+  this->wheelHeight = std::thread(&Rover::checkForWheelHeightIssues, this);
+  this->wheelState = std::thread(&Rover::checkForWheelStateIssues, this);
+  this->wheelMotion = std::thread(&Rover::checkForWheelMotionIssues, this);
 }
 
 void Rover::join() {
-  this->arbiter.join();
-}
-
-void Rover::arbitrate() {
-  while (Global::running.get() && this->running->get()) {
-    for(size_t index = 0; index < Global::Constants::ROVER_NUMBER_OF_WHEELS; index++) {
-      this->states[index]);    
-    }
-    
-    this->encountered++;
-    //each solution passes control to next if unresolved
-    //log chosen solution
-    
-    if (this->encountered >= Global::Constants::PROBLEMS_PER_SIMULATION) {
-      this->running.set(false);
-    }
-  }
+  this->overseer.join();
+  this->groundControl.join();
+  this->navigation.join();
+  this->wheelHeight.join();
+  this->wheelState.join();
+  this->wheelMotion.join();
 }
