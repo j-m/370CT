@@ -8,7 +8,7 @@ void Rover::resolve() {
     
     std::vector<std::string> messages = {"Chosen solution: ", std::to_string(this->command)};
     IO::Output::messages.waitForControl(Control::PRODUCER);
-    IO::Output::messages.buffer = messages;
+    IO::Output::messages.set(messages);
     IO::Output::messages.giveControlTo(Control::CONSUMER);
     
     // log chosen solution

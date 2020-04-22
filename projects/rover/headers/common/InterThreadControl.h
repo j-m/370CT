@@ -4,7 +4,7 @@
 
 class InterThreadControl {
 public:
-  InterThreadControl(unsigned int initialController = 0): control(initialController) {};
+  InterThreadControl(unsigned int initialController = 0);
   ~InterThreadControl() {};
 
   void waitForControl(unsigned int id);

@@ -6,10 +6,10 @@
 void IO::Output::console() {
   while (Global::running.get()) {
     IO::Output::messages.waitForControl(Control::CONSUMER);
-    for (std::string message: IO::Output::messages.buffer) {
+    for (std::string message: IO::Output::messages.get()) {
       std::cout << message << std::endl;
     }
-    IO::Output::messages.buffer.clear();
+    IO::Output::messages.set({});
     IO::Output::messages.giveControlTo(Control::PRODUCER);
   }
 }

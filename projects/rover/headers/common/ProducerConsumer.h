@@ -24,6 +24,14 @@ public:
     this->consumer->join();
   };
   
+  BufferType get() {
+    return this->buffer;
+  }
+  
+  void set(BufferType buffer) {
+    this->buffer = buffer;
+  }
+  
 private:
   std::thread* producer;
   std::thread* consumer;

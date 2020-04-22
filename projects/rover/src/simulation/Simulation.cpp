@@ -26,7 +26,7 @@ void Simulation::setWheelStates() {
     logMessages.push_back("WHEEL_" + std::to_string(index) + ": " + std::to_string(newStates[index]));
   }
   IO::Output::messages.waitForControl(Control::PRODUCER);
-  IO::Output::messages.buffer = logMessages;
+  IO::Output::messages.set(logMessages);
   IO::Output::messages.giveControlTo(Control::CONSUMER);
   this->rover.states.set(newStates);
 }
