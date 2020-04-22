@@ -2,6 +2,11 @@
 #include <mutex>
 #include <condition_variable>
 
+enum Control {
+  PRODUCER = 0,
+  CONSUMER = 1
+};
+
 class InterThreadControl {
 public:
   InterThreadControl(unsigned int initialController = 0);

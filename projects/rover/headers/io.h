@@ -1,8 +1,9 @@
 #pragma once
-#include "common/ProducerConsumer.h"
-
 #include <vector>
 #include <string>
+#include <thread>
+
+#include "common/InterThreadControl.h"
 
 namespace IO {
   void initialise();
@@ -12,7 +13,9 @@ namespace IO {
     void initialise();
     void join();
 
-    extern ProducerConsumer<std::vector<std::string>> messages;
+    extern InterThreadControl control;
+    extern std::vector<std::string> messageBuffer;
+    
     extern std::thread consoleThread;
     void console();
     
@@ -27,9 +30,10 @@ namespace IO {
     void initialise();
     void join();
     
-    extern ProducerConsumer<char> keyboard;
+    extern char keyboardBuffer;
     extern std::thread listener;
     extern std::thread handler;
+    extern InterThreadControl control;
     void listenToKeyPress();
     
     namespace Menu {

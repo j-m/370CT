@@ -7,13 +7,13 @@ void IO::Output::Menu::modes() {
     "2. Simulation (several random occurrences)",
     "3. Automatic (1-3 sequentially)"
   };
-  IO::Output::messages.waitForControl(Control::PRODUCER);
-  IO::Output::messages.set(messages);
-  IO::Output::messages.giveControlTo(Control::CONSUMER);
+  IO::Output::control.waitForControl(Control::PRODUCER);
+  IO::Output::messageBuffer = messages;
+  IO::Output::control.giveControlTo(Control::CONSUMER);
   for (int seconds = 5; seconds > 0; --seconds) {
-    IO::Output::messages.waitForControl(Control::PRODUCER);
-    IO::Output::messages.set({"\rUse 1-6 to select a scenario. Scenario 6 will automatically run in 5 second(s). Press any key to cancel"}); // TODO
-    IO::Output::messages.giveControlTo(Control::CONSUMER);
+    IO::Output::control.waitForControl(Control::PRODUCER);
+    IO::Output::messageBuffer = {"\rUse 1-6 to select a scenario. Scenario 6 will automatically run in 5 second(s). Press any key to cancel"};
+    IO::Output::control.giveControlTo(Control::CONSUMER);
     std::this_thread::sleep_for(std::chrono::seconds(1));
   }
 }

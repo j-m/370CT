@@ -5,11 +5,11 @@
 
 void IO::Output::console() {
   while (Global::running.get()) {
-    IO::Output::messages.waitForControl(Control::CONSUMER);
-    for (std::string message: IO::Output::messages.get()) {
+    IO::Output::control.waitForControl(Control::CONSUMER);
+    for (std::string message: IO::Output::messageBuffer) {
       std::cout << message << std::endl;
     }
-    IO::Output::messages.set({});
-    IO::Output::messages.giveControlTo(Control::PRODUCER);
+    IO::Output::messageBuffer = {};
+    IO::Output::control.giveControlTo(Control::PRODUCER);
   }
 }

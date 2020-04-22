@@ -25,9 +25,9 @@ void Simulation::setWheelStates() {
     newStates[index] = this->getRandomWheelState();
     logMessages.push_back("WHEEL_" + std::to_string(index) + ": " + std::to_string(newStates[index]));
   }
-  IO::Output::messages.waitForControl(Control::PRODUCER);
-  IO::Output::messages.set(logMessages);
-  IO::Output::messages.giveControlTo(Control::CONSUMER);
+  IO::Output::control.waitForControl(Control::PRODUCER);
+  IO::Output::messageBuffer = logMessages;
+  IO::Output::control.giveControlTo(Control::CONSUMER);
   this->rover.states.set(newStates);
 }
 

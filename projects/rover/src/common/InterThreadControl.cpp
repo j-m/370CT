@@ -8,13 +8,11 @@ InterThreadControl::InterThreadControl(unsigned int initialController)
 
 void InterThreadControl::waitForControl(unsigned int id) {
   std::unique_lock<std::mutex> lock(this->mutex);
-  this->condition.wait(lock, [this, id]{ return control != id;});
-  lock.unlock();
+  this->condition.wait(lock, [this, id]{ return control == id;});
 }
 
 void InterThreadControl::giveControlTo(unsigned int id) {
   std::unique_lock<std::mutex> lock(this->mutex);
   this->control = id;
-  lock.unlock();
   this->condition.notify_all();
 }
