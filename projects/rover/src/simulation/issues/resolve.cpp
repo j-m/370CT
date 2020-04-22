@@ -17,10 +17,19 @@ void Rover::resolve() {
       IO::Output::control.waitForControl(Control::PRODUCER);
       IO::Output::messageBuffer = {"No issues detected",""};
       IO::Output::control.giveControlTo(Control::CONSUMER);  
+      
+      IO::Output::fileControl.waitForControl(Control::PRODUCER);
+      IO::Output::fileBuffer = {"No issues detected",""};
+      IO::Output::fileControl.giveControlTo(Control::CONSUMER);
     } else {
       IO::Output::control.waitForControl(Control::PRODUCER);
       IO::Output::messageBuffer = {"Solution: " + RoverCommandsToString[this->command]};
       IO::Output::control.giveControlTo(Control::CONSUMER);
+      
+      IO::Output::fileControl.waitForControl(Control::PRODUCER);
+      IO::Output::fileBuffer = {"Solution: " + RoverCommandsToString[this->command]};
+      IO::Output::fileControl.giveControlTo(Control::CONSUMER);
+      
       bool success = false;
       if(this->command == RoverCommands::CALL_FOR_HELP) {
         success = true;
@@ -34,6 +43,10 @@ void Rover::resolve() {
       IO::Output::control.waitForControl(Control::PRODUCER);
       IO::Output::messageBuffer = { success ? "SUCCESSFUL" : "UNSUCCESSFUL",""};
       IO::Output::control.giveControlTo(Control::CONSUMER);
+  
+      IO::Output::fileControl.waitForControl(Control::PRODUCER);
+      IO::Output::fileBuffer = { success ? "SUCCESSFUL" : "UNSUCCESSFUL",""};
+      IO::Output::fileControl.giveControlTo(Control::CONSUMER);
       
       if (this->encountered++ == Global::Constants::PROBLEMS_PER_SIMULATION) {
         this->finished = true;

@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <thread>
+#include <fstream>
 
 #include "common/InterThreadControl.h"
 
@@ -15,9 +16,14 @@ namespace IO {
 
     extern InterThreadControl control;
     extern std::vector<std::string> messageBuffer;
-    
     extern std::thread consoleThread;
     void console();
+    
+    extern InterThreadControl fileControl;
+    extern std::vector<std::string> fileBuffer;
+    extern std::ofstream file;
+    extern std::thread fileThread;
+    void log();
     
     namespace Menu {     
       void introduction();

@@ -28,6 +28,10 @@ void Simulation::setWheelStates() {
   IO::Output::control.waitForControl(Control::PRODUCER);
   IO::Output::messageBuffer = logMessages;
   IO::Output::control.giveControlTo(Control::CONSUMER);
+  
+  IO::Output::fileControl.waitForControl(Control::PRODUCER);
+  IO::Output::fileBuffer = logMessages;
+  IO::Output::fileControl.giveControlTo(Control::CONSUMER);
   this->rover.states.set(newStates);
 }
 
