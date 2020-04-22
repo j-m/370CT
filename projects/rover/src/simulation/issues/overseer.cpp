@@ -2,7 +2,7 @@
 #include "simulation/Rover.h"
 
 void Rover::oversee() {
-  while (Global::running.get() && this->running->get()) {
+  while (Global::running.get() && this->running()) {
     this->control.waitForControl(ControlHierarchy::OVERSEER);
     this->command = RoverCommands::NONE;
     unsigned int wheelsWithIssue = 0;

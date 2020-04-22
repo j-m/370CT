@@ -10,6 +10,6 @@ void IO::Output::console() {
       std::cout << message << std::endl;
     }
     IO::Output::messages.buffer.clear();
-    IO::Output::messages.waitForControl(Control::PRODUCER);
+    IO::Output::messages.giveControlTo(Control::PRODUCER);
   }
 }

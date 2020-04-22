@@ -1,5 +1,6 @@
 #pragma once
 enum ControlHierarchy {
+  ISSUER,
   OVERSEER,
   MULTIPLE_ISSUES,
   WHEEL_STATE,

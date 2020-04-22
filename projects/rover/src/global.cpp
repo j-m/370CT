@@ -15,9 +15,6 @@ void Global::initialise() {
 
 void Global::quit() {
   Global::running.set(false);
-}
-
-void Global::join() {
   IO::join();
   Simulations::join();
 }

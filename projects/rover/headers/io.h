@@ -20,7 +20,6 @@ namespace IO {
       void introduction();
       void modes();
       void scenarios();
-      void threads();
     }
   }
   
@@ -29,6 +28,8 @@ namespace IO {
     void join();
     
     extern ProducerConsumer<char> keyboard;
+    extern std::thread listener;
+    extern std::thread handler;
     void listenToKeyPress();
     
     namespace Menu {

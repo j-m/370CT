@@ -3,17 +3,21 @@
 #include "simulation/Flag.h"
 #include "simulation/Rover.h"
 
+#include <thread>
+
 class Simulation {
 public:
-  Simulation(SimulationFlag flag): flags(flag) {};
+  Simulation(SimulationFlag flag);
   
-  void initialise();
   void join();
 
 private:
   SimulationFlag flags;
   Rover rover;
   unsigned int encountered;
+  std::thread thread;
+  
+  void loop();
   
   WheelState getRandomWheelState();
   void setWheelStates();

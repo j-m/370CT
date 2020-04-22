@@ -4,5 +4,5 @@
 int main() {
   Global::initialise();
   IO::Output::Menu::introduction();
-  Global::join();
+//  Global::join();
 }

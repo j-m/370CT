@@ -2,7 +2,7 @@
 #include "simulation/Rover.h"
 
 void Rover::checkForMultipleIssues() {
-  while (Global::running.get() && this->running->get()) {
+  while (Global::running.get() && this->running()) {
     this->control.waitForControl(ControlHierarchy::MULTIPLE_ISSUES);
     unsigned int numberOfIssues = 0;
     for (WheelState state : this->states.get()) {

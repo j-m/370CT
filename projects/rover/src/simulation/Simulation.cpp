@@ -1,7 +1,9 @@
 #include <chrono>
 #include <random>
+#include <string>
 
 #include "global.h"
+#include "io.h"
 #include "simulation/Simulation.h"
 #include "simulation/WheelState.h"
 
@@ -17,19 +19,29 @@ WheelState Simulation::getRandomWheelState() {
 }
 
 void Simulation::setWheelStates() {
+  std::vector<std::string> logMessages;
   std::array<WheelState, Global::Constants::ROVER_NUMBER_OF_WHEELS> newStates;
   for(size_t index = 0; index < Global::Constants::ROVER_NUMBER_OF_WHEELS; index++) {
     newStates[index] = this->getRandomWheelState();
+    logMessages.push_back("WHEEL_" + std::to_string(index) + ": " + std::to_string(newStates[index]));
   }
+  IO::Output::messages.waitForControl(Control::PRODUCER);
+  IO::Output::messages.buffer = logMessages;
+  IO::Output::messages.giveControlTo(Control::CONSUMER);
   this->rover.states.set(newStates);
 }
 
-void Simulation::initialise() {
-  while (Global::running.get() 
-   && this->rover.encountered->get() < Global::Constants::PROBLEMS_PER_SIMULATION) {
+Simulation::Simulation(SimulationFlag flag): flags(flag) {
+  this->thread = std::thread(&Simulation::loop, this);
+}
+
+void Simulation::loop() {
+  while (Global::running.get() && this->rover.running()) {
+    this->rover.control.waitForControl(ControlHierarchy::ISSUER);
     this->setWheelStates();
-    this->encountered++;
+    this->rover.control.giveControlTo(ControlHierarchy::OVERSEER);
   }  
+  this->join();
 }
 
 void Simulation::join() {

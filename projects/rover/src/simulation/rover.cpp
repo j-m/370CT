@@ -2,13 +2,12 @@
 #include "simulation/Rover.h"
 
 Rover::Rover() {
-  this->encountered->set(0);
+  this->encountered.set(0);
   this->command = RoverCommands::NONE;
-  this->control.giveControlTo(ControlHierarchy::OVERSEER);
+  this->control.giveControlTo(ControlHierarchy::ISSUER);
 }
 
-void Rover::initialise(InterThreadVariable<bool>* simulationRunning) {
-  this->running = simulationRunning;
+void Rover::initialise() {
   this->overseer = std::thread(&Rover::oversee, this);
   this->multiple = std::thread(&Rover::checkForMultipleIssues, this);
   this->navigation = std::thread(&Rover::checkForNavigationIssues, this);
@@ -24,4 +23,8 @@ void Rover::join() {
   this->wheelHeight.join();
   this->wheelState.join();
   this->wheelMotion.join();
+}
+
+bool Rover::running() {
+  return this->encountered.get() < Global::Constants::PROBLEMS_PER_SIMULATION;
 }

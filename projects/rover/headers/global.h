@@ -10,6 +10,5 @@ namespace Global {
   extern InterThreadVariable<bool> running;
   
   void initialise();
-  void join();
   void quit();
 }
