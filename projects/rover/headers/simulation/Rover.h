@@ -18,11 +18,11 @@ public:
 
   InterThreadVariable<std::array<WheelState, Global::Constants::ROVER_NUMBER_OF_WHEELS>> states;
   InterThreadControl control;
-  
-  InterThreadVariable<unsigned int> encountered;
-  bool running();
+  std::atomic<bool> finished;
   
 private:
+  unsigned int encountered;
+
   RoverCommands command;
   std::thread resolver;
   std::thread numberIssues;

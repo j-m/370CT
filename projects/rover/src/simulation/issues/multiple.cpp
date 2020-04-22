@@ -3,7 +3,7 @@
 #include "simulation/Rover.h"
 
 void Rover::checkNumberOfIssues() {
-  while (Global::running && this->running()) {
+  while (Global::running && !this->finished) {
     this->control.waitForControl(ControlHierarchy::NUMBER_ISSUES);
     unsigned int numberOfIssues = 0;
     for (WheelState state : this->states.get()) {
@@ -13,10 +13,7 @@ void Rover::checkNumberOfIssues() {
     }
     if (numberOfIssues == 0) {
       this->command = RoverCommands::NONE;
-      IO::Output::control.waitForControl(Control::PRODUCER);
-      IO::Output::messageBuffer = {"No issues detected"};
-      IO::Output::control.giveControlTo(Control::CONSUMER);  
-      this->control.giveControlTo(ControlHierarchy::ISSUER); 
+      this->control.giveControlTo(ControlHierarchy::RESOLVE); 
     } else if (numberOfIssues > 1) {
       this->command = RoverCommands::CALL_FOR_HELP;
       this->control.giveControlTo(ControlHierarchy::RESOLVE);

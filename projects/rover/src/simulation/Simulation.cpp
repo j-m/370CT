@@ -14,7 +14,7 @@ WheelState Simulation::getRandomWheelState() {
   if (hasIssue(generator) > Global::Constants::PERCENTAGE_PROBABILITY_WHEEL_ISSUE) {
     return WheelState::OK;
   }
-  std::uniform_int_distribution<int> problemChoice(1, WheelState::length);
+  std::uniform_int_distribution<int> problemChoice(1, WheelState::length - 1);
   return static_cast<WheelState>(problemChoice(generator));
 }
 
@@ -23,7 +23,7 @@ void Simulation::setWheelStates() {
   std::array<WheelState, Global::Constants::ROVER_NUMBER_OF_WHEELS> newStates;
   for(size_t index = 0; index < Global::Constants::ROVER_NUMBER_OF_WHEELS; index++) {
     newStates[index] = this->getRandomWheelState();
-    logMessages.push_back("WHEEL_" + std::to_string(index) + ": " + std::to_string(newStates[index]));
+    logMessages.push_back("WHEEL_" + std::to_string(index) + ": " + WheelStateToString[newStates[index]]);
   }
   IO::Output::control.waitForControl(Control::PRODUCER);
   IO::Output::messageBuffer = logMessages;
@@ -37,8 +37,11 @@ Simulation::Simulation(SimulationFlag flag): flags(flag) {
 }
 
 void Simulation::loop() {
-  while (Global::running && this->rover.running()) {
+  while (Global::running) {
     this->rover.control.waitForControl(ControlHierarchy::ISSUER);
+    if (this->rover.finished) {
+      break;
+    }
     this->setWheelStates();
     this->rover.control.giveControlTo(ControlHierarchy::ISSUER + 1);
   }  

@@ -2,7 +2,7 @@
 #include "simulation/Rover.h"
 
 void Rover::checkForNavigationIssues() {
-  while (Global::running && this->running()) {
+  while (Global::running && !this->finished) {
     this->control.waitForControl(ControlHierarchy::NAVIGATION);
     for (WheelState state : this->states.get()) {
       if (state == WheelState::BLOCKED_LARGE_OBSTACLE) {

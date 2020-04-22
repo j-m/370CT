@@ -2,7 +2,8 @@
 #include "simulation/Rover.h"
 
 Rover::Rover() {
-  this->encountered.set(0);
+  this->encountered = 0;
+  this->finished = false;
   this->command = RoverCommands::NONE;
   this->control.giveControlTo(ControlHierarchy::ISSUER);
 }
@@ -23,8 +24,4 @@ void Rover::join() {
   this->wheelHeight.join();
   this->wheelState.join();
   this->wheelMotion.join();
-}
-
-bool Rover::running() {
-  return this->encountered.get() < Global::Constants::PROBLEMS_PER_SIMULATION;
 }
