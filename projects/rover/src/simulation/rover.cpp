@@ -8,8 +8,8 @@ Rover::Rover() {
 }
 
 void Rover::initialise() {
-  this->overseer = std::thread(&Rover::oversee, this);
-  this->multiple = std::thread(&Rover::checkForMultipleIssues, this);
+  this->resolver = std::thread(&Rover::resolve, this);
+  this->numberIssues = std::thread(&Rover::checkNumberOfIssues, this);
   this->navigation = std::thread(&Rover::checkForNavigationIssues, this);
   this->wheelHeight = std::thread(&Rover::checkForWheelHeightIssues, this);
   this->wheelState = std::thread(&Rover::checkForWheelStateIssues, this);
@@ -17,8 +17,8 @@ void Rover::initialise() {
 }
 
 void Rover::join() {
-  this->overseer.join();
-  this->multiple.join();
+  this->resolver.join();
+  this->numberIssues.join();
   this->navigation.join();
   this->wheelHeight.join();
   this->wheelState.join();

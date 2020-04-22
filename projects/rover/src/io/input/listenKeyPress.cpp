@@ -2,7 +2,7 @@
 #include "io.h"
 
 void IO::Input::listenToKeyPress() {
-  while (Global::running.get()) {
+  while (Global::running) {
     IO::Input::control.waitForControl(Control::PRODUCER);
     IO::Input::keyboardBuffer = getchar();
     IO::Input::control.giveControlTo(Control::CONSUMER);

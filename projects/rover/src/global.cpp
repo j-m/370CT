@@ -2,19 +2,22 @@
 #include "io.h"
 #include "simulations.h"
 
-InterThreadVariable<bool> Global::running;
+std::atomic<bool> Global::running;
 
 void Global::initialise() {
-  if (Global::running.get()) {
+  if (Global::running) {
     return;
   }
-  Global::running.set(true);
+  Global::running = true;
   IO::initialise();
   Simulations::initialise();
 }
 
 void Global::quit() {
-  Global::running.set(false);
+  Global::running  = false;
+}
+
+void Global::join() {
   IO::join();
   Simulations::join();
 }

@@ -4,7 +4,7 @@
 #include "io.h"
 
 void IO::Output::console() {
-  while (Global::running.get()) {
+  while (Global::running) {
     IO::Output::control.waitForControl(Control::CONSUMER);
     for (std::string message: IO::Output::messageBuffer) {
       std::cout << message << std::endl;

@@ -2,8 +2,8 @@
 #include "simulation/Rover.h"
 
 void Rover::checkForWheelHeightIssues() {
-  while (Global::running.get() && this->running()) {
-    this->control.waitForControl(ControlHierarchy::WHEEL_MOTION);
+  while (Global::running && this->running()) {
+    this->control.waitForControl(ControlHierarchy::WHEEL_HEIGHT);
     WheelState issue;
     for (WheelState state : this->states.get()) {
       if (state != WheelState::OK) {
@@ -19,7 +19,7 @@ void Rover::checkForWheelHeightIssues() {
       this->control.giveControlTo(ControlHierarchy::RESOLVE);
     } 
     else {
-      this->control.giveControlTo(ControlHierarchy::WHEEL_MOTION + 1);
+      this->control.giveControlTo(ControlHierarchy::WHEEL_HEIGHT + 1);
     }
   }
 }

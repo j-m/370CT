@@ -6,5 +6,5 @@ int main() {
   Global::initialise();
   IO::Output::Menu::introduction();
   Simulations::start();
-//  Global::join();
+  Global::join();
 }

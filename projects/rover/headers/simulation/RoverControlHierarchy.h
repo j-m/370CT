@@ -1,8 +1,7 @@
 #pragma once
 enum ControlHierarchy {
   ISSUER,
-  OVERSEER,
-  MULTIPLE_ISSUES,
+  NUMBER_ISSUES,
   WHEEL_STATE,
   WHEEL_HEIGHT,
   WHEEL_MOTION,

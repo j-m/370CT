@@ -22,18 +22,16 @@ public:
   InterThreadVariable<unsigned int> encountered;
   bool running();
   
-private:  
-  std::thread overseer;
-  void oversee();
+private:
   RoverCommands command;
-  void resolve();
-  
-  std::thread multiple;
+  std::thread resolver;
+  std::thread numberIssues;
   std::thread wheelState;
   std::thread wheelHeight;
   std::thread wheelMotion;
   std::thread navigation;
-  void checkForMultipleIssues();
+  void resolve();
+  void checkNumberOfIssues();
   void checkForNavigationIssues();
   void checkForWheelHeightIssues();
   void checkForWheelStateIssues();

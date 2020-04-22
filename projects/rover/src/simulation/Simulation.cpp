@@ -7,7 +7,7 @@
 #include "simulation/Simulation.h"
 #include "simulation/WheelState.h"
 
-std::default_random_engine generator;
+std::default_random_engine generator(std::random_device{}());
 
 WheelState Simulation::getRandomWheelState() {
   std::uniform_int_distribution<int> hasIssue(0, 100);
@@ -32,15 +32,19 @@ void Simulation::setWheelStates() {
 }
 
 Simulation::Simulation(SimulationFlag flag): flags(flag) {
+  this->rover.initialise();
   this->thread = std::thread(&Simulation::loop, this);
 }
 
 void Simulation::loop() {
-  while (Global::running.get() && this->rover.running()) {
+  while (Global::running && this->rover.running()) {
     this->rover.control.waitForControl(ControlHierarchy::ISSUER);
     this->setWheelStates();
-    this->rover.control.giveControlTo(ControlHierarchy::OVERSEER);
+    this->rover.control.giveControlTo(ControlHierarchy::ISSUER + 1);
   }  
+  IO::Output::control.waitForControl(Control::PRODUCER);
+  IO::Output::messageBuffer = {"Simulation complete"};
+  IO::Output::control.giveControlTo(Control::CONSUMER);  
   this->join();
 }
 

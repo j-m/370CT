@@ -3,7 +3,7 @@
 std::thread IO::Input::listener;
 std::thread IO::Input::handler;
 char IO::Input::keyboardBuffer;
-InterThreadControl IO::Input::control = Control::PRODUCER;
+InterThreadControl IO::Input::control;
 
 void IO::Input::initialise() {
   IO::Input::listener = std::thread(IO::Input::listenToKeyPress);
