@@ -3,8 +3,12 @@
 #include "simulation/Rover.h"
 
 void Rover::checkNumberOfIssues() {
-  while (Global::running && !this->finished) {
+  while (true) {
     this->control.waitForControl(ControlHierarchy::NUMBER_ISSUES);
+    if (!Global::running || this->finished) {
+      break;
+    }
+    
     unsigned int numberOfIssues = 0;
     for (WheelState state : this->states.get()) {
       if (state != WheelState::OK) {

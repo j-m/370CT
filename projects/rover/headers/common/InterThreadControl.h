@@ -14,6 +14,7 @@ public:
 
   void waitForControl(unsigned int id);
   void giveControlTo(unsigned int id);
+  void notify();
     
 private:
   unsigned int control;

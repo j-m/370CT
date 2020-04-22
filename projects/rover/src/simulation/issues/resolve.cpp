@@ -7,8 +7,11 @@
 extern std::default_random_engine generator;
 
 void Rover::resolve() {
-  while (Global::running && !this->finished) {
+  while (this) {
     this->control.waitForControl(ControlHierarchy::RESOLVE);
+    if (!Global::running || this->finished) {
+      break;
+    }
     
     if (this->command == RoverCommands::NONE) {
       IO::Output::control.waitForControl(Control::PRODUCER);

@@ -4,8 +4,11 @@
 #include "io.h"
 
 void IO::Output::console() {
-  while (Global::running) {
+  while (true) {
     IO::Output::control.waitForControl(Control::CONSUMER);
+    if (!Global::running) {
+      break;
+    }
     for (std::string message: IO::Output::messageBuffer) {
       std::cout << message << std::endl;
     }

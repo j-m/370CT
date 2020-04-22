@@ -11,6 +11,7 @@ void IO::Input::initialise() {
 }
  
 void IO::Input::join() {
+  IO::Input::control.notify();
   IO::Input::listener.join();
   IO::Input::handler.join();
 }

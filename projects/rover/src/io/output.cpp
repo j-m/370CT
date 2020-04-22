@@ -9,5 +9,6 @@ void IO::Output::initialise() {
 }
  
 void IO::Output::join() {
+  IO::Output::control.notify();
   IO::Output::consoleThread.join();
 }

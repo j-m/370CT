@@ -2,8 +2,11 @@
 #include "simulation/Rover.h"
 
 void Rover::checkForWheelStateIssues() {
-  while (Global::running && !this->finished) {
+  while (true) {
     this->control.waitForControl(ControlHierarchy::WHEEL_STATE);
+    if (!Global::running || this->finished) {
+      break;
+    }
     for (WheelState state : this->states.get()) {
       if (state == WheelState::FAILURE) {
         this->command = RoverCommands::CALL_FOR_HELP;

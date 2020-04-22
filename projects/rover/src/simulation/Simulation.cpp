@@ -37,9 +37,9 @@ Simulation::Simulation(SimulationFlag flag): flags(flag) {
 }
 
 void Simulation::loop() {
-  while (Global::running) {
+  while (true) {
     this->rover.control.waitForControl(ControlHierarchy::ISSUER);
-    if (this->rover.finished) {
+    if (!Global::running || this->rover.finished) {
       break;
     }
     this->setWheelStates();
@@ -48,9 +48,10 @@ void Simulation::loop() {
   IO::Output::control.waitForControl(Control::PRODUCER);
   IO::Output::messageBuffer = {"Simulation complete"};
   IO::Output::control.giveControlTo(Control::CONSUMER);  
-  this->join();
 }
 
 void Simulation::join() {
+  this->rover.control.notify();
   this->rover.join();
+  this->thread.join();
 }

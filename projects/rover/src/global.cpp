@@ -14,10 +14,10 @@ void Global::initialise() {
 }
 
 void Global::quit() {
-  Global::running  = false;
+  Global::running = false;
 }
 
 void Global::join() {
-  IO::join();
   Simulations::join();
+  IO::join();
 }
