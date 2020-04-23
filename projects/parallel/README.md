@@ -6,9 +6,9 @@ Write a program which collects data on the total data processing capabilities of
 This should include:
 
 - [x] Total core count (real or virtual, either is good).  
-- [ ] Clock speed of cores.  
-- [ ] System Ram.  
-- [ ] The size of your home folder.  
+- [x] Clock speed of cores.  
+- [x] System Ram.  
+- [x] The size of your home folder.  
 
 ## Part Two
 
@@ -50,20 +50,4 @@ Once again, using the code from part three as a starting point.
 - [x] Locate the centre for this set of particles (the point around which they are all grouped)
 - [x] For ten steps, move the vectors towards this point by either adding or subtracting one from an element of the current subject vector (the one being currently processed).
 - [x] Display the progress of the entire set at five, ten, then twenty steps.
-- [ ] Print both the final distance between all the particles and this central point and their original distance from it.
-
-## Questions
-
-- Do I have to do part 1?
-  Yes. If you want the grade that is.
-
-- By "at runtime" do you mean dynamic schedule? Or literally ask the user for a schedule?
-
-- Once part 4 done does part 3 need to happen?
-
-- Specifically 5 10 then 20, not like every 5?
-
-- Centre recalculated each iteration?
-
-- Once two neighbours have the same position, do they then go towards others? Eventually all reach a common point.  
-  Doesn't matter
+- [x] Print both the final distance between all the particles and this central point and their original distance from it.
